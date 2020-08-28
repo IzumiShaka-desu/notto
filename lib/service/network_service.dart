@@ -9,7 +9,7 @@ class NetworkService {
 
   String path = "http://192.168.43.150/notto/";
   Future<List<Notes>> getListNotes() async {
-    String email =await SFService().getEmail() ?? '';
+    String email = await SFService().getEmail() ?? '';
     List<Notes> notes = [];
     String url = path + "servicenote.php?email=$email";
     var response = await client.get(url);
@@ -34,7 +34,7 @@ class NetworkService {
   }
 
   Future<bool> addNotes(String title, String notes) async {
-    String email=await SFService().getEmail()??'';
+    String email = await SFService().getEmail() ?? '';
     String url = path + "servicenote.php";
     var response = await client
         .post(url, body: {'title': title, 'email': email, 'notes': notes});
@@ -46,10 +46,14 @@ class NetworkService {
   }
 
   Future<bool> editNotes(String title, String notes, int id) async {
-    String email =await SFService().getEmail() ?? '';
+    String email = await SFService().getEmail() ?? '';
     String url = path + "servicenote.php";
-    var response = await client.post(url,
-        body: {'title': title, 'email': email, 'notes': notes, 'id': id.toString()});
+    var response = await client.post(url, body: {
+      'title': title,
+      'email': email,
+      'notes': notes,
+      'id': id.toString()
+    });
     if (response.statusCode == 200) {
       var result = jsonDecode(response.body);
       return (result['result'] == 1);

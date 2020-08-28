@@ -287,16 +287,17 @@ class _LoginRegisterState extends State<LoginRegister> {
                 )),
         AnimatedPositioned(
           duration: Duration(milliseconds: 200),
-          bottom: (isSuccessfull)?-size.height:-2,
-          right: (isSuccessfull)?-size.width:-2,
-                  child: AnimatedContainer(
+          bottom: (isSuccessfull) ? -size.height : -2,
+          right: (isSuccessfull) ? -size.width : -2,
+          child: AnimatedContainer(
             duration: Duration(milliseconds: 250),
-            
-            decoration: BoxDecoration(color:Colors.white,shape: BoxShape.circle),
-            height: (isSuccessfull)?size.height*3:0,
-            width: (isSuccessfull)?size.width*3:0,
-            onEnd: ()=>goToDashboard(),
-          ),)
+            decoration:
+                BoxDecoration(color: Colors.white, shape: BoxShape.circle),
+            height: (isSuccessfull) ? size.height * 3 : 0,
+            width: (isSuccessfull) ? size.width * 3 : 0,
+            onEnd: () => goToDashboard(),
+          ),
+        )
       ]),
     );
   }
@@ -332,7 +333,7 @@ class _LoginRegisterState extends State<LoginRegister> {
     setState(() {
       isLoading = false;
     });
-    if(result['result']){
+    if (result['result']) {
       SFService().saveLoginDetails(email, result['fnameData']);
       animate();
     }

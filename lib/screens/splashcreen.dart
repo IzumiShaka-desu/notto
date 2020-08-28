@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:notto/screens/logres.dart';
 import 'package:notto/service/sharepref_service.dart';
@@ -12,15 +11,16 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  bool isAnimate=false;
-  animate(){
+  bool isAnimate = false;
+  animate() {
     setState(() {
-      isAnimate=true;
+      isAnimate = true;
     });
   }
+
   @override
   void initState() {
-   delayMethod(2500, ()=>animate());
+    delayMethod(2500, () => animate());
     super.initState();
   }
 
@@ -43,7 +43,7 @@ class _SplashScreenState extends State<SplashScreen> {
             width: sized,
             duration: Duration(milliseconds: 350),
             curve: Curves.fastLinearToSlowEaseIn,
-            onEnd:()=>goToHome(),
+            onEnd: () => goToHome(),
             decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(sized)),

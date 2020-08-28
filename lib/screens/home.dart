@@ -30,9 +30,7 @@ class _HomeState extends State<Home> {
           title: createTitle(),
           centerTitle: true,
           actions: [
-            IconButton(
-                icon: Icon(Icons.exit_to_app),
-                onPressed: () => logOut())
+            IconButton(icon: Icon(Icons.exit_to_app), onPressed: () => logOut())
           ],
         ),
         body: SafeArea(
@@ -281,15 +279,17 @@ class _HomeState extends State<Home> {
     } catch (e) {
       debugPrint(e.toString());
     }
-    try{setState(() {
-      listNote = notes;
-    });}catch(e){
+    try {
+      setState(() {
+        listNote = notes;
+      });
+    } catch (e) {
       print(e.toString());
     }
   }
-  logOut()async{
-                      await SFService().removeSaveLogin();
-                      Navigator.of(context).pushReplacement(routeAnimRoute(LoginRegister()));
-                    }
-  
+
+  logOut() async {
+    await SFService().removeSaveLogin();
+    Navigator.of(context).pushReplacement(routeAnimRoute(LoginRegister()));
+  }
 }

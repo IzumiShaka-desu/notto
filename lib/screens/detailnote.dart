@@ -90,53 +90,54 @@ class _DetailNoteState extends State<DetailNote> {
       @required String notes}) async {
     var service = NetworkService();
     String msg = '', timeout = '';
-    if(title.isEmpty || notes.isEmpty){
-        crtSnackbar("title dan catatan tidak boleh kssong");
-    }
-   else {if (id != null) {
-      bool result;
-      try {
-        result = await service.editNotes(title, notes, id);
-      } on SocketException catch (e) {
-        if (isTimeOut(e)) timeout = " koneksi terputus";
-        debugPrint(e.toString());
-      } catch (e) {
-        debugPrint("err : "+e.toString());
-      }
-      (result ?? false)
-          ? msg = 'catatan berhasil diubah'
-          : msg = 'catatan gagal diubah';
-      crtSnackbar(msg+timeout);
+    if (title.isEmpty || notes.isEmpty) {
+      crtSnackbar("title dan catatan tidak boleh kssong");
     } else {
-       bool result;
-      try {
-        result = await service.addNotes(title, notes);
-      } on SocketException catch (e) {
-        if (isTimeOut(e)) timeout = " koneksi terputus";
-        debugPrint(e.toString());
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-      (result ?? false)
-          ? msg = 'catatan berhasil ditambahkan'
-          : msg = 'catatan gagal ditambahkan';
+      if (id != null) {
+        bool result;
+        try {
+          result = await service.editNotes(title, notes, id);
+        } on SocketException catch (e) {
+          if (isTimeOut(e)) timeout = " koneksi terputus";
+          debugPrint(e.toString());
+        } catch (e) {
+          debugPrint("err : " + e.toString());
+        }
+        (result ?? false)
+            ? msg = 'catatan berhasil diubah'
+            : msg = 'catatan gagal diubah';
+        crtSnackbar(msg + timeout);
+      } else {
+        bool result;
+        try {
+          result = await service.addNotes(title, notes);
+        } on SocketException catch (e) {
+          if (isTimeOut(e)) timeout = " koneksi terputus";
+          debugPrint(e.toString());
+        } catch (e) {
+          debugPrint(e.toString());
+        }
+        (result ?? false)
+            ? msg = 'catatan berhasil ditambahkan'
+            : msg = 'catatan gagal ditambahkan';
 
-      crtSnackbar(msg+timeout);
+        crtSnackbar(msg + timeout);
+      }
     }
-  }}
-  crtSnackbar(String msgs)=>_sfKey.currentState.showSnackBar(SnackBar(
-          duration: Duration(seconds: 2),
-          backgroundColor: Colors.white,
-          content: Material(
-            type: MaterialType.transparency,
-            child: Container(
-              height: 50,
-              child: Center(
-                  child: Text(
-                msgs,
-                style:
-                    TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
-              )),
-            ),
-          )));
+  }
+
+  crtSnackbar(String msgs) => _sfKey.currentState.showSnackBar(SnackBar(
+      duration: Duration(seconds: 2),
+      backgroundColor: Colors.white,
+      content: Material(
+        type: MaterialType.transparency,
+        child: Container(
+          height: 50,
+          child: Center(
+              child: Text(
+            msgs,
+            style: TextStyle(fontWeight: FontWeight.w700, color: Colors.black),
+          )),
+        ),
+      )));
 }

@@ -44,7 +44,7 @@ emailValidator(String email) {
   return false;
 }
 
- delayMethod(int delayMillis, Function method) async {
+delayMethod(int delayMillis, Function method) async {
   return Timer(Duration(milliseconds: delayMillis), method);
 }
 
@@ -58,17 +58,16 @@ createSnackBar(String msg) => SnackBar(
 createTitle() => Text('Notto',
     style:
         GoogleFonts.rosario(color: Colors.amber, fontWeight: FontWeight.bold));
-createTextField(
-        TextEditingController controller, String label, IconData icon,{bool isObscure}) =>
+createTextField(TextEditingController controller, String label, IconData icon,
+        {bool isObscure}) =>
     TextFormField(
         controller: controller,
-        obscureText: isObscure??false,
+        obscureText: isObscure ?? false,
         decoration: InputDecoration(
             labelText: label,
-            
             prefixIcon: Icon(icon),
             border: UnderlineInputBorder(),
             hintText: ' $label'));
 
-  bool isTimeOut(SocketException e)=>e.osError.message.contains('Connection timed out');
-    
+bool isTimeOut(SocketException e) =>
+    e.osError.message.contains('Connection timed out');
